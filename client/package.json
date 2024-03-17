@@ -11,16 +11,21 @@
   },
   "dependencies": {
     "@junobuild/core": "^0.0.47",
-    "@tailwindcss/forms": "^0.5.7",
+    "@swup/parallel-plugin": "^0.4.0",
     "ethers": "^6.11.1",
+    "flowbite-react": "^0.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-icons": "^5.0.1",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "swup": "^4.6.0"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
+    "@types/react-helmet": "^6.1.11",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "@vitejs/plugin-react-swc": "^3.5.0",

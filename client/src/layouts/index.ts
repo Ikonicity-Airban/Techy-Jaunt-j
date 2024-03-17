@@ -1,1 +1,5 @@
-export { default as RootRouter } from "./root-layout"
+export { default as RootLayout } from "./root-layout"
+export { default as OnboardingLayout } from "./onboarding-layout"
+export { default as AppLayout } from "./app-layout"
+export { default as AuthLayout } from "./auth-layout"
+export { default as BackLayout } from "./back-layout"

@@ -1,0 +1,12 @@
+nav[aria-label="Sidebar"] div {
+  background: #0f3535 !important;
+  color: white !important;
+}
+
+nav[aria-label="Sidebar"] * {
+  color: rgb(238, 231, 231) !important;
+}
+nav[aria-label="Sidebar"] a:hover > * {
+  color: #0f3535 !important;
+  fill: #0f3535;
+}

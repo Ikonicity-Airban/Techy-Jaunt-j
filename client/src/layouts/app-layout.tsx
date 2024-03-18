@@ -24,7 +24,7 @@ const navLinks = [
     {
         icon: PiWifiMediumDuotone,
         name: "wifi",
-        link: "/free-wifi",
+        link: "/wifi",
     },
     {
         icon: PiUserCircle,

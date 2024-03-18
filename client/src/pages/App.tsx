@@ -31,7 +31,7 @@ const sidebarLinks = [
   },
   {
     name: "Free Wifi",
-    link: "/free-wifi",
+    link: "/wifi",
     icon: PiWifiMediumDuotone
   },
   {
@@ -44,11 +44,7 @@ const sidebarLinks = [
     link: "/news-update",
     icon: PiNewspaperClippingDuotone
   },
-  {
-    name: "Logout",
-    link: "/login",
-    icon: IoIosLogOut
-  },
+
 ]
 
 
@@ -64,8 +60,8 @@ const categoryData = [
     img: ""
   },
   {
-    title: "Free Wifi",
-    link: "/free-wifi",
+    title: "Wifi",
+    link: "/wifi",
     img: ""
   },
   {
@@ -110,12 +106,14 @@ function HomePage() {
         <Sidebar.CTA >
           <Avatar rounded img="/vite.svg" bordered size="lg" />
         </Sidebar.CTA>
-        <Sidebar.Items className=''>
-          <Sidebar.ItemGroup className='text-white'>
+        <Sidebar.Items className='justify-between'>
+          <Sidebar.ItemGroup>
             {sidebarLinks.map(({ name, icon, link }) => (
-              <Sidebar.Item key={link} icon={icon} className="p-4" style={{
-              }} >{name}</Sidebar.Item>
+              <Sidebar.Item key={link} icon={icon} className="p-2"  >{name}</Sidebar.Item>
             ))}
+          </Sidebar.ItemGroup>
+          <Sidebar.ItemGroup>
+            <Sidebar.Item key="/" icon={IoIosLogOut} className="p-2"  >Logout</Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>

@@ -1,5 +1,19 @@
-import { AppLayout, AuthLayout, BackLayout, OnboardingLayout, RootLayout } from "./layouts";
-import { CreateAccountPage, HomePage, LoginPage, NavigationPage, OnBoardingPage } from "./pages";
+import {
+    AppLayout,
+    AuthLayout,
+    BackLayout,
+    OnboardingLayout,
+    RootLayout,
+} from "./layouts";
+import {
+    CreateAccountPage,
+    HomePage,
+    LoginPage,
+    NavigationPage,
+    OnBoardingPage,
+    WifiPage,
+    WifiPlacePage,
+} from "./pages";
 
 import ErrorPage from "./error-page";
 import { createBrowserRouter } from "react-router-dom";
@@ -25,7 +39,6 @@ const router = createBrowserRouter([
                             {
                                 path: "navigation",
                                 element: <NavigationPage />,
-
                             },
                             {
                                 path: "profile",
@@ -36,16 +49,35 @@ const router = createBrowserRouter([
                                 element: "",
                             },
                             {
-                                path: "free-wifi",
-                                element: "",
+                                path: "wifi",
+                                children:
+                                    [
+                                        {
+                                            path: "",
+                                            element: <WifiPage />,
+                                        },
+                                        {
+                                            path: ":wifiId",
+                                            element: <WifiPlacePage />,
+
+                                        }
+                                    ]
+                            },
+                            {
+                                path: "wifi",
+                                element: <WifiPage />,
+                            },
+                            {
+                                path: "wifi",
+                                element: <WifiPage />,
                             },
                             {
                                 path: "navigation",
                                 element: "",
                             },
-                        ]
-                    }
-                ]
+                        ],
+                    },
+                ],
             },
             {
                 path: "/onboarding",
@@ -55,7 +87,7 @@ const router = createBrowserRouter([
                         path: "",
                         element: <OnBoardingPage />,
                     },
-                ]
+                ],
             },
             {
                 path: "/",
@@ -63,17 +95,16 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "Login",
-                        element: < LoginPage />,
+                        element: <LoginPage />,
                     },
                     {
                         path: "create-account",
                         element: <CreateAccountPage />,
                     },
-                ]
+                ],
             },
+        ],
+    },
+]);
 
-        ]
-    }
-])
-
-export default router 
+export default router;

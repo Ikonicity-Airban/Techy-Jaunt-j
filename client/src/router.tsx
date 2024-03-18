@@ -16,6 +16,7 @@ import {
 } from "./pages";
 
 import ErrorPage from "./error-page";
+import Loading from "./pages/loading";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "/",
+                path: "",
+                element: <Loading />
+            },
+            {
+                path: "/dashboard",
                 element: <AppLayout />,
                 children: [
                     {

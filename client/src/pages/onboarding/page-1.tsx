@@ -15,12 +15,16 @@ const onboardingData = [
     {
         text: "Your are lost navigate your way through campus life",
         imageUrl: image_2
+    },
+    {
+        text: "Looking for where to access wifi",
+        imageUrl: image_2
     }
 ]
 
 
 export default function OnBoardingPage() {
-    const [pageNumber, setPageNumber] = useState(1)
+    const [pageNumber, setPageNumber] = useState(0)
 
     const handleNext = () => setPageNumber((prev) => prev < onboardingData.length - 1 ? prev + 1 : onboardingData.length - 1)
     const handlePrev = () => setPageNumber((prev) => prev > 0 ? prev - 1 : 0)
@@ -28,27 +32,31 @@ export default function OnBoardingPage() {
 
     return (
         <main className="w-full min-h-[85vh] flex items-center flex-col justify-between transition-fade text-center px-6">
-            <div className="flex w-full flex-[0.5]">
+            <div className="flex w-full h-[20vh]">
                 <img src={icon} className="" alt="icon" />
             </div>
             <Page {...onboardingData[pageNumber]} index={pageNumber} />
             <div className="flex justify-between w-full">
 
-                <Button pill gradientMonochrome="teal" className='px-4' size="xs" onClick={handlePrev} disabled={pageNumber == 0}>
-                    <HiArrowLeft className='mr-3' />
-                    <span className=''>Prev </span>
-                </Button>
+                {pageNumber == 0 ||
+                    <Button pill gradientMonochrome="teal" className='px-4' size="xs" onClick={handlePrev} disabled={pageNumber == 0}>
+                        <HiArrowLeft className='mr-3' />
+                        <span className=''>Prev </span>
+                    </Button>
+                }
+                <div className="flex justify-end w-full">
 
-                {
-                    pageNumber == 1 ?
+                    {
+                        pageNumber == onboardingData.length - 1 ?
 
-                        <Link to="/login" className='px-4 ring-1 ring-white flex text-sm items-center rounded-full text-white' >
-                            <span className=''>Get Started </span>
-                            <HiArrowRight className='ml-3' />
-                        </Link> : <Button pill gradientMonochrome="teal" className='px-4' size="xs" onClick={handleNext}>
-                            <span className=''>Next </span>
-                            <HiArrowRight className='ml-3' />
-                        </Button>}
+                            <Link to="/login" replace className='px-4 ring-1 ring-white flex text-sm items-center rounded-full text-white' >
+                                <span className=''>Get Started </span>
+                                <HiArrowRight className='ml-3' />
+                            </Link> : <Button pill gradientMonochrome="teal" className='px-4' size="xs" onClick={handleNext}>
+                                <span className=''>Next </span>
+                                <HiArrowRight className='ml-3' />
+                            </Button>}
+                </div>
             </div>
             <div className="flex gap-2 mt-10">
                 {onboardingData.map((_, idx) => <span className='size-2 ring-white ring-1 rounded-full' style={{ backgroundColor: idx == pageNumber ? "white" : "transparent" }}></span>)}

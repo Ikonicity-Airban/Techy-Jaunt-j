@@ -1,6 +1,6 @@
 import { Button, Label, Select, TextInput } from "flowbite-react";
-
-import { IoSend } from "react-icons/io5";
+import { FormEventHandler } from "react";
+import { useNavigate } from "react-router-dom";
 
 const formData = [
     {
@@ -25,47 +25,60 @@ const formData = [
     },
 ]
 
+
+
 export default function CreateAccountPage() {
+
+    const navigate = useNavigate()
+
+    const handleSubmit: FormEventHandler = (e) => {
+        e.preventDefault()
+        navigate("/login", {
+            replace: true,
+            state: {}
+        })
+    }
+
     return (
-        <div className="px-2">
 
-            <form className=" space-y-6">
-                <div>
-                    <Label>Institution</Label>
-                    <Select>
-                        <option>
-                            University of Nigeria, Nsukka
-                        </option>
-                    </Select>
-                </div>
-                <div>
-                    <Label>Faculty</Label>
-                    <Select>
-                        <option>
-                            Engineering
-                        </option>
-                    </Select>
-                </div>
-                <div>
-                    <Label>Department</Label>
-                    <Select>
-                        <option>
-                            Electronics Engineering
-                        </option>
-                    </Select>
-                </div>
-                {formData.map((item) => <div key={item.name}>
-                    <Label className="text-sm">{item.title}</Label>
-                    <TextInput className="bg-transparent" {...item} autoComplete="false" />
-                </div>)}
-            </form>
+        <form className=" space-y-6 px-2" onSubmit={handleSubmit}>
+            <div>
+                <Label>Institution</Label>
+                <Select>
+                    <option>
+                        University of Nigeria, Nsukka
+                    </option>
+                </Select>
+            </div>
+            <div>
+                <Label>Faculty</Label>
+                <Select>
+                    <option>
+                        Engineering
+                    </option>
+                </Select>
+            </div>
+            <div>
+                <Label>Department</Label>
+                <Select>
+                    <option>
+                        Electronics Engineering
+                    </option>
+                </Select>
+            </div>
+            {formData.map((item) => <div key={item.name}>
+                <Label className="text-sm">{item.title}</Label>
+                <TextInput className="bg-transparent" {...item} autoComplete="false" />
+            </div>)}
 
 
-            <Button gradientMonochrome="teal" className='my-10 items-center' fullSized >
-                <span className=''>Login </span>
-                <IoSend className='ml-3' />
-            </Button>
+            <div className="py-4">
+                <Button gradientMonochrome="teal" className='' fullSized type="submit">
+                    <span className=''>Sign-up</span>
 
-        </div>
+                </Button>
+            </div>
+        </form>
+
     )
 }

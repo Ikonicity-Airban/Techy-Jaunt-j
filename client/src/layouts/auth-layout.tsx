@@ -28,7 +28,7 @@ function AuthLayout() {
             <div className="p-4">
                 <Outlet />
             </div>
-            <footer className="text-center text-sm my-4">© Team J - campus sync app</footer>
+            <footer className="text-center text-xs py-4">© Team J - Campus sync app</footer>
         </main>
     )
 }

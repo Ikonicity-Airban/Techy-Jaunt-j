@@ -7,7 +7,7 @@ const OnboardingLayout = () => {
             <div className="flex-1 w-full">
                 <Outlet />
             </div>
-            <footer className="text-sm text-gr">© Team J - campus sync app</footer>
+            <footer className="text-sm py-4">© Team J - campus sync app</footer>
         </main>
     </>;
 };

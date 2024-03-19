@@ -3,7 +3,7 @@ import { PiCarBold, PiCrosshairDuotone } from "react-icons/pi";
 import { BsPersonWalking } from "react-icons/bs";
 import { FaBiking } from "react-icons/fa";
 import { GoogleMap } from ".";
-import { formatTime } from "../app/lib/helper";
+import { formatTime } from "../api/lib/helper";
 
 interface NavigationObjProps {
     location: string

@@ -1,9 +1,9 @@
 import { Button, Card, Modal, } from "flowbite-react";
 
 import { IoSearch } from "react-icons/io5";
-import { NavModal } from "../components";
-import { ProcessedNavigation } from "../components";
-import useModal from "../app/hooks/useModal";
+import { NavModal } from "../../components";
+import { ProcessedNavigation } from "../../components";
+import useModal from "../../api/hooks/useModal";
 import { useState } from "react";
 
 interface NavigationObjProps {

@@ -35,3 +35,73 @@ button[type="submit"]
   height: 100% !important;
 }
 /* map ends */
+
+.title {
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    lime,
+    white,
+    rgb(0, 255, 255),
+    white,
+    orange
+  );
+  background-clip: text;
+}
+
+.logo-clipped {
+  color: transparent;
+  background: linear-gradient(135deg, rgb(17, 244, 66), rgb(0, 255, 255));
+  background-clip: text;
+}
+
+.ring-button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #00c656;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+.ring-button:hover {
+  border-color: #29d25c;
+}
+
+.ring-button:focus,
+.ring-button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  transform-origin: center bottom;
+  animation: fall 4s linear infinite;
+}
+
+.confetti.square {
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+}
+.confetti.triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+/* --------------------confetti ends---------------------- */
+
+/* -----------------Dark mode--------------------- */
+
+@media (prefers-color-scheme: dark) {
+}
+
+/* -----------------Dark mode ends--------------------- */
+
+/* ========================= components ======================== */

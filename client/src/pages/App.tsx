@@ -1,6 +1,6 @@
 import './App.css'
 
-import { Avatar, Button, Card, Navbar, Sidebar, TextInput } from 'flowbite-react';
+import { Avatar, Button, Navbar, Sidebar, TextInput } from 'flowbite-react';
 import { PiKeyDuotone, PiMapPinDuotone, PiNewspaperClippingDuotone, PiShoppingCartDuotone, PiUserCircleDuotone, PiWifiMediumDuotone } from 'react-icons/pi';
 
 import { CiBellOn } from 'react-icons/ci'
@@ -10,7 +10,7 @@ import { IoIosLogOut } from 'react-icons/io';
 import { IoSearchOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom';
 import accmImg from '../assets/images/frame 57.svg';
-import { truncateString } from '../app/lib/helper';
+import { truncateString } from '../api/lib/helper';
 import { useState } from 'react'
 
 const sidebarLinks = [
@@ -57,17 +57,17 @@ const categoryData = [
   {
     title: "Navigation",
     link: "/navigation",
-    img: ""
+    img: accmImg
   },
   {
     title: "Wifi",
     link: "/wifi",
-    img: ""
+    img: accmImg
   },
   {
-    title: "Market Space",
-    link: "/market-space",
-    img: ""
+    title: "Market Place",
+    link: "/market-place",
+    img: accmImg
   }
 ]
 
@@ -142,10 +142,10 @@ function HomePage() {
             <article className="grid grid-cols-2 gap-4">
               {categoryData.map(({ img, link, title }) =>
                 <Link to={link} className="">
-                  <Card className='h-32'>
-                    <img src={img} alt="" className='' />
-                    <h3 className='w-full z-1 text-center'>{title}</h3>
-                  </Card>
+                  <div className='h-32 relative overflow-hidden rounded-lg'>
+                    <img src={img} alt="" className='absolute inset-0 h-full object-cover' />
+                    <p className='w-full z-1 break-words text-center z-10'>{title}</p>
+                  </div>
                 </Link>
               )}
             </article>

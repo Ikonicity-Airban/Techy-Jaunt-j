@@ -1,22 +1,26 @@
 import {
+    AccommodationPage,
+    AccommodationTypePage,
+    CreateAccountPage,
+    HomePage,
+    LoginPage,
+    MarketPlacePage,
+    NavigationPage,
+    OnBoardingPage,
+    ProfilePage,
+    WifiPage,
+    WifiPlacePage,
+} from "./pages";
+import {
     AppLayout,
     AuthLayout,
     BackLayout,
     OnboardingLayout,
     RootLayout,
 } from "./layouts";
-import {
-    CreateAccountPage,
-    HomePage,
-    LoginPage,
-    NavigationPage,
-    OnBoardingPage,
-    WifiPage,
-    WifiPlacePage,
-} from "./pages";
 
 import ErrorPage from "./error-page";
-import Loading from "./pages/loading";
+import Loading from "./pages/landing";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -51,7 +55,29 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: "accommodation",
-                                element: "",
+                                children: [
+                                    {
+                                        path: "",
+                                        element: <AccommodationPage />
+                                    },
+                                    {
+                                        path: ":acmId",
+                                        element: <AccommodationTypePage />
+                                    }
+                                ]
+                            },
+                            {
+                                path: "profile",
+                                children: [
+                                    {
+                                        path: "",
+                                        element: <ProfilePage />
+                                    },
+                                    {
+                                        path: ":profileId",
+                                        element: <ProfilePage />
+                                    }
+                                ]
                             },
                             {
                                 path: "wifi",
@@ -69,12 +95,19 @@ const router = createBrowserRouter([
                                     ]
                             },
                             {
-                                path: "wifi",
-                                element: <WifiPage />,
-                            },
-                            {
-                                path: "wifi",
-                                element: <WifiPage />,
+                                path: "market-place",
+                                children:
+                                    [
+                                        {
+                                            path: "",
+                                            element: <MarketPlacePage />,
+                                        },
+                                        {
+                                            path: ":marketId",
+                                            element: "",
+
+                                        }
+                                    ]
                             },
                             {
                                 path: "navigation",

@@ -9,7 +9,7 @@ const navLinks = [
     {
         icon: PiHouseDuotone,
         name: "home",
-        link: "/",
+        link: "/dashboard",
     },
     {
         icon: PiMapPinDuotone,
@@ -36,21 +36,23 @@ const navLinks = [
 export default function AppLayout() {
     return (
         <main className="bg-beige min-h-screen pb-20">
-            <Outlet />
-            <footer className="fixed z-[999] bottom-0 w-full">
-                <Navbar className="w-full bg-[#0f3535]" border>
-                    {navLinks.map(({ icon, link, name }) => {
-                        const Icon = icon;
-                        return (
-                            <div className="px-2 py-2" key={name}>
-                                <NavLink to={link} className={className}>
-                                    <Icon size={24} />
-                                </NavLink>
-                            </div>)
-                    })}
+            <div className="max-w-xl mx-auto relative">
+                <Outlet />
+                <footer className="fixed z-[999] bottom-0 w-full">
+                    <Navbar className=" max-w-xl bg-[#0f3535]" border>
+                        {navLinks.map(({ icon, link, name }) => {
+                            const Icon = icon;
+                            return (
+                                <div className="px-2 py-2" key={name}>
+                                    <NavLink to={link} className={className}>
+                                        <Icon size={24} className=""/>
+                                    </NavLink>
+                                </div>)
+                        })}
 
-                </Navbar>
-            </footer>
+                    </Navbar>
+                </footer>
+            </div>
         </main>
     )
 }

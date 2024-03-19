@@ -1,4 +1,5 @@
 import { Button, Label, Select, TextInput } from "flowbite-react";
+
 import { FormEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -41,7 +42,7 @@ export default function CreateAccountPage() {
 
     return (
 
-        <form className=" space-y-6 px-2" onSubmit={handleSubmit}>
+        <form className=" space-y-6" onSubmit={handleSubmit}>
             <div>
                 <Label>Institution</Label>
                 <Select>

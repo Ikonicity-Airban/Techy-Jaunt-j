@@ -1,8 +1,8 @@
 import { Button, Label, Select, TextInput } from "flowbite-react"
-import { FormEventHandler } from "react"
-
-import { IoSend } from "react-icons/io5"
 import { Link, useNavigate } from "react-router-dom"
+
+import { FormEventHandler } from "react"
+import { IoSend } from "react-icons/io5"
 
 const formData = [
     {
@@ -29,13 +29,16 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="px-2">
+        <div className="">
             <form className=" space-y-6" onSubmit={handleSubmit}>
-                <Select>
-                    <option>
-                        University of Nigeria Nsukka
-                    </option>
-                </Select>
+                <div>
+                    <Label className="text-sm">Institution</Label>
+                    <Select>
+                        <option>
+                            University of Nigeria, Nsukka.
+                        </option>
+                    </Select>
+                </div>
                 {formData.map((item) => <div key={item.name}>
                     <Label className="text-sm">{item.title}</Label>
                     <TextInput className="bg-transparent" {...item} />

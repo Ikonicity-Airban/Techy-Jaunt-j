@@ -5,7 +5,7 @@ import { MdNetworkWifi3Bar } from "react-icons/md";
 const WifiCard = () => {
   return (
     <Link to={"/wifi/ste-fo"}>
-      <div className="border-b-2 border-gray-300 p-3 shadow-md flex h-32 rounded-lg">
+      <div className="ring-2 ring-[#f5d48d] p-3 shadow-md flex h-32 rounded-lg">
         <img src="/vite.svg" alt="" className="flex-1" />
         <div className="grid gap-4 p-2 text-sm">
           <h3 className="text-lg capitalize font-semibold">Ste-fo</h3>

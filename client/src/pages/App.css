@@ -11,6 +11,10 @@ nav[aria-label="Sidebar"] a:hover > * {
   fill: #0f3535;
 }
 
+button[type="submit"]
+  span.flex.items-center.transition-all.duration-200.rounded-md.text-sm.px-4.py-2.rounded-r-none {
+  background: transparent !important;
+}
 /* map */
 .map_outer {
   position: relative;

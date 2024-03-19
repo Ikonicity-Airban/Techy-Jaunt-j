@@ -31,9 +31,9 @@ export default function OnBoardingPage() {
 
 
     return (
-        <main className="w-full min-h-[85vh] flex items-center flex-col justify-between transition-fade text-center px-6">
-            <div className="flex w-full h-[20vh]">
-                <img src={icon} className="" alt="icon" />
+        <main className="min-h-[85vh] max-w-xl mx-auto flex items-center flex-col justify-between transition-fade text-center px-6">
+            <div className="flex w-full h-[20vh] items-center">
+                <img src={icon} className="h-20" alt="icon" />
             </div>
             <Page {...onboardingData[pageNumber]} index={pageNumber} />
             <div className="flex justify-between w-full">

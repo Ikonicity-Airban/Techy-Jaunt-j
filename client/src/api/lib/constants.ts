@@ -1,0 +1,1 @@
+export const satellite_string = "4jmet-nqaaa-aaaal-ad4va-cai"

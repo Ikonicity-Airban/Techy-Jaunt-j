@@ -3,7 +3,7 @@ import { Doc, ListParams, deleteDoc, getDoc, listDocs, setDoc, setManyDocs } fro
 import { AddDocType } from "../types/document-types";
 import { nanoid } from "nanoid";
 
-export async function addOneDoc<T>(collection: string, data: T) {
+export async function AddOneDoc<T>(collection: string, data: T) {
     const result = await setDoc<T>({
         collection,
         doc: {
@@ -16,7 +16,7 @@ export async function addOneDoc<T>(collection: string, data: T) {
 }
 
 
-export async function addManyDoc<T>(collection: string[], data: T[]) {
+export async function AddManyDoc<T>(collection: string[], data: T[]) {
     const dataArray = []
 
     let i = 0;
@@ -41,7 +41,7 @@ export async function addManyDoc<T>(collection: string[], data: T[]) {
 }
 
 
-export async function getOneDocs<T>(collection: string, key: string) {
+export async function GetOneDoc<T>(collection: string, key: string) {
     const result = await getDoc<T>({
         collection,
         key,

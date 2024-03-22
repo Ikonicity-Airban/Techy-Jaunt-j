@@ -9,7 +9,6 @@ import { HiBars4 } from 'react-icons/hi2'
 import { IoIosLogOut } from 'react-icons/io';
 import { IoSearchOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom';
-import accmImg from '../assets/images/frame 57.svg';
 import { truncateString } from '../api/lib/helper';
 import { useState } from 'react'
 
@@ -52,22 +51,22 @@ const categoryData = [
   {
     title: "Accommodation",
     link: "/accommodation",
-    img: accmImg
+    img: ""
   },
   {
     title: "Navigation",
     link: "/navigation",
-    img: accmImg
+    img: ""
   },
   {
     title: "Wifi",
     link: "/wifi",
-    img: accmImg
+    img: ""
   },
   {
     title: "Market Place",
     link: "/market-place",
-    img: accmImg
+    img: ""
   }
 ]
 

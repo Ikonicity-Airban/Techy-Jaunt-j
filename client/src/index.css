@@ -72,6 +72,32 @@ a {
   text-decoration: none;
 }
 
+/* cabin */
+/* // <uniquifier>: Use a unique and descriptive class name */
+/* // <weight>: Use a value from 400 to 700 */
+
+.cabin {
+  font-family: "Cabin", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+.open-sans {
+  font-family: "Open sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+input:-internal-autofill-selected {
+  appearance: menulist-button;
+  background-image: none !important;
+  background-color: transparent !important;
+  color: fieldtext !important;
+}
+
 a,
 img,
 span,
@@ -95,24 +121,37 @@ html {
 }
 
 h1 {
-  font-size: 2.8rem;
-  line-height: 3rem;
-}
-h2 {
   font-size: 2.4rem;
   line-height: 3rem;
 }
+h2 {
+  font-size: 2.0rem;
+  line-height: 3rem;
+}
 h3 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   line-height: 3rem;
 }
 h4 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 3rem;
 }
 h5 {
   font-size: 1.2rem;
   line-height: 3rem;
+}
+
+.box-shadow-cool {
+  --bg: initial;
+  box-shadow: 0px -3px 10px 2px rgb(255, 216, 45),
+    4px -2px 10px 2px rgb(252, 44, 44), 0px 4px 10px 5px rgb(69, 82, 255),
+    -4px 4px 10px 2px rgb(29, 255, 96);
+  transition: box-shadow 100ms;
+  cursor: pointer;
+}
+
+.box-shadow-cool:active {
+  box-shadow: none;
 }
 
 /* Components for tailwind class */
@@ -131,15 +170,28 @@ h5 {
     @apply bg-[var(--translucent)] backdrop-blur-md border-b border-[#fff2];
   }
   .btn {
-    @apply flex items-center justify-center px-6 md:px-8 py-3 text-sm select-none cursor-pointer;
+     @apply flex items-center justify-center px-6 md:px-8 py-3 select-none cursor-pointer  transition-shadow duration-150;
   }
   .btn-primary {
     @apply bg-gradient-to-bl from-yellow-700 to-red-500 text-light transition-[background] md:text-sm;
   }
-  .btn-outline {
-    @apply ring-light ring-1;
+  .btn-neon {
+    @apply box-shadow-cool;
+  }
+  .btn-neu-bevel {
+    @apply btn rounded-full border-[1px] flex text-xs min-w-fit shadow-bevel;
+  }
+  .btn-neu-pop {
+    @apply btn rounded-full flex text-xs min-w-fit shadow-pop;
   }
   .card-skew {
     @apply -skew-x-6;
   }
+}
+
+button.bevel {
+  box-shadow: 10px 10px -1px rgba(10, 99, 169, 0.16),
+    -10px -10px 10px -1px rgba(255, 255, 255, 0.7),
+    inset 10px 10px 10px -1px rgba(10, 99, 169, 0.16),
+    inset -10px -10px 10px -1px rgba(255, 255, 255, 0.7);
 }

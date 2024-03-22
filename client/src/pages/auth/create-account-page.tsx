@@ -1,85 +1,83 @@
-import { Button, Label, Select, TextInput } from "flowbite-react";
+import { PiEyeClosed, PiGraduationCap, PiLock, PiUser } from "react-icons/pi";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import { FormEventHandler } from "react";
+import { AddOneDoc } from "../../api/juno/actions";
+import { ICreatedUser } from "../../api/types";
+import Input from "../../components/Input";
+import { InstitutionSelectInput } from "../../components";
 import { useNavigate } from "react-router-dom";
 
 const formData = [
-    {
-        title: "Students Name",
-        name: "students_name",
-        type: "text",
-    },
-    {
-        title: "Matric No.",
-        name: "matric_no",
-        type: "text",
-    },
-    {
-        title: "Password",
-        name: "password",
-        type: "password",
-    },
-    {
-        title: "Confirm Password",
-        name: "confirm_password",
-        type: "password",
-    },
-]
-
-
+  {
+    title: "Name",
+    name: "students_name",
+    type: "text",
+    icon: <PiUser />,
+  },
+  {
+    title: "Matric No.",
+    name: "matric_no",
+    type: "text",
+    icon: <PiGraduationCap />,
+  },
+  {
+    title: "Password",
+    name: "password",
+    type: "password",
+    rightIcon: <PiEyeClosed />,
+    icon: <PiLock />,
+  },
+  {
+    title: "Confirm Password",
+    name: "confirm_password",
+    type: "password",
+    rightIcon: <PiEyeClosed />,
+    icon: <PiLock />,
+  },
+];
 
 export default function CreateAccountPage() {
+  const { register, handleSubmit, reset } = useForm<ICreatedUser>();
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const onSubmit: SubmitHandler<ICreatedUser> = async (data: ICreatedUser) => {
+    reset();
 
-    const handleSubmit: FormEventHandler = (e) => {
-        e.preventDefault()
-        navigate("/login", {
-            replace: true,
-            state: {}
-        })
-    }
+    // await signIn();
+    const result = AddOneDoc<ICreatedUser>("users", data);
+    console.log(
+      "🚀 ~ constonSubmit:SubmitHandler<ICreatedUser>= ~ result:",
+      result
+    );
 
-    return (
+    navigate("/login", {
+      replace: true,
+      state: {},
+    });
+  };
 
-        <form className=" space-y-6" onSubmit={handleSubmit}>
-            <div>
-                <Label>Institution</Label>
-                <Select>
-                    <option>
-                        University of Nigeria, Nsukka
-                    </option>
-                </Select>
-            </div>
-            <div>
-                <Label>Faculty</Label>
-                <Select>
-                    <option>
-                        Engineering
-                    </option>
-                </Select>
-            </div>
-            <div>
-                <Label>Department</Label>
-                <Select>
-                    <option>
-                        Electronics Engineering
-                    </option>
-                </Select>
-            </div>
-            {formData.map((item) => <div key={item.name}>
-                <Label className="text-sm">{item.title}</Label>
-                <TextInput className="bg-transparent" {...item} autoComplete="false" />
-            </div>)}
+  return (
+    <form className=" space-y-6 mt-6" onSubmit={handleSubmit(onSubmit)}>
+      <InstitutionSelectInput />
+      {formData.map((item) => (
+        <div key={item.name}>
+          <Input
+            {...item}
+            placeholder={item.title}
+            {...register(item.name as keyof ICreatedUser)}
+          />
+        </div>
+      ))}
 
-
-            <div className="py-4">
-                <Button gradientMonochrome="teal" className='' fullSized type="submit">
-                    <span className=''>Sign-up</span>
-
-                </Button>
-            </div>
-        </form>
-
-    )
+      <div className="py-4">
+        <button
+          role="button"
+          className="btn-neu-pop w-full text-light bg-green-400 active:shadow-none transition-shadow duration-150"
+          type="submit"
+        >
+          <span className="">Sign Up</span>
+        </button>
+      </div>
+    </form>
+  );
 }

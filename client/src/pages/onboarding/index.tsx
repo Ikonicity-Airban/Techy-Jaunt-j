@@ -1,24 +1,23 @@
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 
-import { Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
-import icon from "../../assets/images/icon.svg"
-import image_1 from '../../assets/images/bedroom.svg';
-import image_2 from '../../assets/images/image 3.svg';
+import accImg from "../../assets/images/accSearch.jpg"
+import icon from "../../assets/logo.svg"
+import navigationImg from "../../assets/images/navigation.jpg"
 import { useState } from 'react';
 
 const onboardingData = [
     {
         text: "Your best bet on secured and affordable accommodation",
-        imageUrl: image_1
+        imageUrl: accImg
     },
     {
         text: "Your are lost navigate your way through campus life",
-        imageUrl: image_2
+        imageUrl: navigationImg
     },
     {
         text: "Looking for where to access wifi",
-        imageUrl: image_2
+        imageUrl: navigationImg
     }
 ]
 
@@ -31,7 +30,7 @@ export default function OnBoardingPage() {
 
 
     return (
-        <main className="min-h-[85vh] max-w-xl mx-auto flex items-center flex-col justify-between transition-fade text-center px-6">
+        <main className="min-h-[85vh] max-w-xl mx-auto flex items-center flex-col justify-between transition-fade text-center px-6 bg-[url('../../assets/images/navigation.jpg')] bg-cover">
             <div className="flex w-full h-[20vh] items-center">
                 <img src={icon} className="h-20" alt="icon" />
             </div>
@@ -39,27 +38,29 @@ export default function OnBoardingPage() {
             <div className="flex justify-between w-full">
 
                 {pageNumber == 0 ||
-                    <Button pill gradientMonochrome="teal" className='px-4' size="xs" onClick={handlePrev} disabled={pageNumber == 0}>
+                    <button className='btn-neu-pop' onClick={handlePrev} disabled={pageNumber == 0}>
                         <HiArrowLeft className='mr-3' />
                         <span className=''>Prev </span>
-                    </Button>
+                    </button>
                 }
                 <div className="flex justify-end w-full">
 
                     {
                         pageNumber == onboardingData.length - 1 ?
 
-                            <Link to="/login" replace className='px-4 ring-1 ring-white flex text-sm items-center rounded-full text-white' >
+                                <Link to="/login" replace className='btn-neu-pop' >
                                 <span className=''>Get Started </span>
                                 <HiArrowRight className='ml-3' />
-                            </Link> : <Button pill gradientMonochrome="teal" className='px-4' size="xs" onClick={handleNext}>
+                            </Link> : <button className='btn-neu-pop' onClick={handleNext}>
                                 <span className=''>Next </span>
                                 <HiArrowRight className='ml-3' />
-                            </Button>}
+                            </button>}
                 </div>
             </div>
             <div className="flex gap-2 mt-10">
-                {onboardingData.map((_, idx) => <span className='size-2 ring-white ring-1 rounded-full' style={{ backgroundColor: idx == pageNumber ? "white" : "transparent" }}></span>)}
+                {onboardingData.map((_, idx) => <span className='size-[7px] ring-white ring-1 rounded-full' style={{ backgroundColor: idx == pageNumber ? "white" : "transparent" }}>
+
+                </span>)}
             </div>
         </main >
     )
@@ -68,12 +69,12 @@ export default function OnBoardingPage() {
 
 const Page = ({ imageUrl, text }: { imageUrl: string, text: string; index: number }) => {
     return (
-        <div className='flex-1 flex flex-col items-center justify-evenly'>
-            <p className='w-full text-light text-xl font-light'>
+        <div className='flex-1 flex flex-col items-center justify-evenly my-10'>
+            <p className='w-full h-[10vh] text-light text-xl font-light'>
                 {text}
             </p>
-            <figure className="flex items-center w-1/3 h-auto object-contain justify-center">
-                <img src={imageUrl} className="object-contain" alt="logo" />
+            <figure className="flex items-center w-2/3 h-[40vh] y-16 object-cover justify-center">
+                <img src={imageUrl} className="object-cover" alt="logo" />
             </figure>
         </div>)
 }

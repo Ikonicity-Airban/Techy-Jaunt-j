@@ -19,9 +19,14 @@ import {
     RootLayout,
 } from "./layouts";
 
+import AddDocsToDataStore from "./pages/admin/addDocs";
 import ErrorPage from "./error-page";
-import Loading from "./pages/landing";
 import { createBrowserRouter } from "react-router-dom";
+
+// import Loading from "./pages/landing";
+
+// import AdminPage from "./pages/admin";
+
 
 const router = createBrowserRouter([
     {
@@ -31,10 +36,10 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "",
-                element: <Loading />
+                element: <AddDocsToDataStore />
             },
             {
-                path: "/",
+                path: "",
                 element: <AppLayout />,
                 children: [
                     {

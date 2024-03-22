@@ -1,47 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-export function useQuery<T>(func: () => Promise<T>) {
-    // Todo: adding cache key
-    const [col, setCol] = useState<T>();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<unknown>()
+export default function useQuery<T>(func: () => Promise<T>) {
+  // Todo: adding cache key
+  const [col, setCol] = useState<T>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<unknown>();
 
-    useEffect(() => {
-        setLoading(true)
-        try {
-            (async () => setCol(await func()))()
-        } catch (error: unknown) {
-            setError(error)
-        }
-        finally {
-            setLoading(false)
-        }
-    }, [func, loading])
+  useEffect(() => {
+    setLoading(true);
+    try {
+      (async () => setCol(await func()))();
+      console.log("🚀 ~ col:", col);
+    } catch (error: unknown) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [func, loading]);
 
-    const refetch = () => {
-        setLoading(true);
-    };
+  const refetch = () => {
+    setLoading(true);
+  };
 
-    return { refetch, loading, col, error }
-}
-
-export function useMutation<T>(func: () => Promise<T>) {
-    // todo: add a key for caching
-    const [col, setCol] = useState<T>();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<unknown>();
-
-    useEffect(() => {
-        setLoading(true)
-        try {
-            (async () => setCol(await func()))()
-        } catch (error: unknown) {
-            setError(error)
-        }
-        finally {
-            setLoading(false)
-        }
-    }, [func, loading])
-
-    return { loading, col, error }
+  return { refetch, loading, col, error };
 }

@@ -1,4 +1,3 @@
-
 // import { URLSearchParams } from "url";
 
 import { useEffect, useState } from "react";
@@ -6,7 +5,6 @@ import { useEffect, useState } from "react";
 type Props = {
   query: string;
 };
-
 
 // google map search with location completion
 
@@ -17,8 +15,8 @@ function GoogleMap({ query = "Enugu" }: Props) {
   );
 
   useEffect(() => {
-    getLocations(query)
-  }, [])
+    getLocations(query);
+  }, []);
 
   /* geo location getter*/
   const getLocations = async (text: string) => {

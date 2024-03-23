@@ -5,15 +5,18 @@ export type IUser = {
 }
 
 export interface BaseUser {
-    institution: string
-    matric_no: string
+    email:string
+    institution?: string
+    matric_no?: string
+    password: string
+    
 }
 
 export type IILoginUser = BaseUser
 
 export type ICreatedUser = {
-    email?: string,
-    faculty: string,
-    department: string,
     name: string
+    email?: string,
+    faculty?: string,
+    department?: string,
 } & BaseUser

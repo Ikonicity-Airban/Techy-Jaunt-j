@@ -1,65 +1,118 @@
-import { FormEventHandler, useState } from "react";
-import { IoAtOutline, IoLockClosed } from "react-icons/io5";
+import { ChangeEventHandler, FormEventHandler, useState } from "react";
 
+import { GetOneDoc } from "../../api/juno/actions";
+import { IILoginUser } from "../../api/types";
 import Input from "../../components/Input";
-import { PiEyeClosed } from "react-icons/pi";
+import { PasswordInput } from "../../components";
+import { PiAt } from "react-icons/pi";
 import { signIn } from "@junobuild/core";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+// interface ILoginForm {
+//   email: string;
+//   password: string;
+// }
+
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
-  const handleSubmit: FormEventHandler = (e) => {
-    e.preventDefault();
-    toast.success(email + password)
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSignIn = async () => {
+  const onSubmit: FormEventHandler = async (e) => {
+    setLoading(true);
+    toast.loading("fetch your account", {
+      id: "loading",
+    });
+    e.preventDefault();
+
     try {
+      const userResult = await GetOneDoc<IILoginUser>("user", data.email);
+
+      if (userResult.data || userResult.data.password !== data.password) {
+        toast.error("invalid Email or password", {
+          id: "loading",
+        });
+        return;
+      }
+
+      toast.success("verified", {
+        id: "loading",
+      });
+      
+      toast.success("logging In with ICP");
+
+      sessionStorage.setItem("user", JSON.stringify(userResult));
       await signIn();
-      toast.success("Login successful");
+
       navigate("/dashboard", {
         replace: true,
         preventScrollReset: true,
       });
     } catch (error) {
-      console.error(error);
+      toast.error(error.message, {
+        id: "loading",
+      });
+    } finally {
+      setLoading(false);
     }
-    0;
+  };
+
+  const signInWithICP = async () => {
+    try {
+      await signIn();
+      navigate("/dashboard", {
+        replace: true,
+        preventScrollReset: true,
+      });
+    } catch (error) {
+      toast.error("login unsuccessful", {
+        id: "loading",
+      });
+    }
   };
 
   return (
     <section className="space-y-8 my-4 flex-1 h-full w-full">
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={onSubmit}>
         <h3 className="bg-gradient-to-tl from-red-400 text-center to-orange-500 text-transparent bg-clip-text">
           Login Form
         </h3>
         <Input
-          placeholder="johndoe@email.com"
-          type="email"
-          icon={<IoAtOutline />}
           required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={data.email}
+          icon={<PiAt />}
+          name="email"
+          placeholder="john@example.com"
+          onChange={handleChange}
         />
-        <Input
+        <PasswordInput
+          value={data.password}
           required
-          placeholder="*^%&*()!@#"
-          type="password"
-          icon={<IoLockClosed />}
-          rightIcon={<PiEyeClosed />}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          placeholder="%^%f@3#a$@><^&"
+          onChange={handleChange}
         />
-        <button
-          type="submit"
-          className="btn-neu-pop w-full text-light bg-green-400 active:btn-nue-bevel"
-        >
-          Login
-        </button>
+
+        <div className="py-4">
+          <button
+            disabled={loading}
+            className="btn-neu-pop w-full disabled:bg-gray-400 text-light bg-green-500 active:shadow-none transition-shadow duration-150"
+            type="submit"
+          >
+            <span className="">{loading ? "loading" : "Login"}</span>
+          </button>
+        </div>
       </form>
       <div className="flex w-full items-center gap-2">
         <span className="h-[2px] bg-[#0004] flex-1" />
@@ -69,7 +122,7 @@ const LoginPage = () => {
       <div className="pb-10">
         <button
           type="button"
-          onClick={handleSignIn}
+          onClick={signInWithICP}
           className="btn-neu-pop w-full active:shadow-none transition-shadow duration-150"
         >
           <img

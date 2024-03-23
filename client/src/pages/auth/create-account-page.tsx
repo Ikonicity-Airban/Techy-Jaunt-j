@@ -1,81 +1,104 @@
-import { PiEyeClosed, PiGraduationCap, PiLock, PiUser } from "react-icons/pi";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { ChangeEventHandler, FormEventHandler, useState } from "react";
+import { PiAt, PiUser } from "react-icons/pi";
+import { authSubscribe, setDoc } from "@junobuild/core";
 
-import { AddOneDoc } from "../../api/juno/actions";
-import { ICreatedUser } from "../../api/types";
 import Input from "../../components/Input";
-import { InstitutionSelectInput } from "../../components";
+import { PasswordInput } from "../../components";
+import { signIn } from "@junobuild/core";
 import { useNavigate } from "react-router-dom";
-
-const formData = [
-  {
-    title: "Name",
-    name: "students_name",
-    type: "text",
-    icon: <PiUser />,
-  },
-  {
-    title: "Matric No.",
-    name: "matric_no",
-    type: "text",
-    icon: <PiGraduationCap />,
-  },
-  {
-    title: "Password",
-    name: "password",
-    type: "password",
-    rightIcon: <PiEyeClosed />,
-    icon: <PiLock />,
-  },
-  {
-    title: "Confirm Password",
-    name: "confirm_password",
-    type: "password",
-    rightIcon: <PiEyeClosed />,
-    icon: <PiLock />,
-  },
-];
+import toast from "react-hot-toast";
 
 export default function CreateAccountPage() {
-  const { register, handleSubmit, reset } = useForm<ICreatedUser>();
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
   const navigate = useNavigate();
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  const onSubmit: SubmitHandler<ICreatedUser> = async (data: ICreatedUser) => {
-    reset();
+  const onSubmit: FormEventHandler = async (e) => {
+    setLoading(true);
+    toast.loading("setting up your account", {
+      id: "loading",
+    });
+    e.preventDefault();
+    await signIn();
 
-    // await signIn();
-    const result = AddOneDoc<ICreatedUser>("users", data);
-    console.log(
-      "🚀 ~ constonSubmit:SubmitHandler<ICreatedUser>= ~ result:",
-      result
-    );
-
-    navigate("/login", {
+    const unSubscribe = authSubscribe((user) => {
+      try {
+        setDoc({
+          collection: "users",
+          doc: {
+            key: data.email,
+            data: {
+              ...data,
+              ...user,
+            },
+          },
+        }).then((result) => {
+          console.log("User:", result);
+          unSubscribe();
+        });
+      } catch (error) {
+        toast.error(error.message, {
+          id: "loading",
+        });
+        console.error(error);
+      }
+    });
+    setLoading(false);
+    toast.success("account created", {
+      id: "loading",
+    });
+    navigate("/onboarding", {
       replace: true,
-      state: {},
     });
   };
 
   return (
-    <form className=" space-y-6 mt-6" onSubmit={handleSubmit(onSubmit)}>
-      <InstitutionSelectInput />
-      {formData.map((item) => (
-        <div key={item.name}>
-          <Input
-            {...item}
-            placeholder={item.title}
-            {...register(item.name as keyof ICreatedUser)}
-          />
-        </div>
-      ))}
+    <form className=" space-y-6 mt-6" onSubmit={onSubmit}>
+      <Input
+        required
+        name="name"
+        value={data.name}
+        autoFocus
+        icon={<PiUser />}
+        autoCapitalize=""
+        placeholder="Full Name"
+        onChange={handleChange}
+      />
+      <Input
+        required
+        value={data.email}
+        icon={<PiAt />}
+        name="email"
+        placeholder="john@example.com"
+        onChange={handleChange}
+      />
+      <PasswordInput
+        value={data.password}
+        required
+        name="password"
+        placeholder="%^%f@3#a$@><^&"
+        onChange={handleChange}
+      />
 
       <div className="py-4">
         <button
+          disabled={loading}
           role="button"
-          className="btn-neu-pop w-full text-light bg-green-400 active:shadow-none transition-shadow duration-150"
+          className="btn-neu-pop w-full disabled:bg-gray-400 text-light bg-green-500 active:shadow-none transition-shadow duration-150"
           type="submit"
         >
-          <span className="">Sign Up</span>
+          <span className="">{loading ? "loading" : "Sign Up"}</span>
         </button>
       </div>
     </form>

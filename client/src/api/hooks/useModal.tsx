@@ -1,24 +1,19 @@
 import { useState } from "react";
 
 export default function useModal() {
-  const [modalState, setModalState] = useState(false);
+  const [modalState, setModalState] = useState(false)
 
   function showModal() {
-    setModalState(true);
+    setModalState(true)
   }
-
   function hideModal() {
-    setModalState(false);
+    setModalState(false)
   }
-
-  function toggleModal() {
-    setModalState((prev) => !prev);
-  }
-
+  
   return {
     modalState,
     showModal,
-    hideModal,
-    toggleModal,
-  };
+    hideModal
+  }
+
 }
